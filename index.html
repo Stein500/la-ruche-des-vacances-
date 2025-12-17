@@ -1,0 +1,3030 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Ruche des Vacances - Classe de M. CODJO J. S. Stein</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles optimisés avec scroll smooth */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        :root {
+            --primary-yellow: #FFD166;
+            --primary-blue: #118AB2;
+            --primary-green: #06D6A0;
+            --primary-red: #EF476F;
+            --primary-purple: #9D4EDD;
+            --light-bg: #F8F9FA;
+            --dark-bg: #073B4C;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, rgba(245,247,250,0.8) 0%, rgba(195,207,226,0.8) 100%), url('assets/images/hero-bg.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: #333;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .app-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Logo Styles */
+        .logo {
+            width: 150px;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Écran de connexion */
+        .login-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 90vh;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+        }
+        
+        .login-screen h1 {
+            font-family: 'Comic Neue', cursive;
+            font-size: 2.8rem;
+            color: var(--dark-bg);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-screen h1 span {
+            color: var(--primary-yellow);
+            background-color: var(--dark-bg);
+            padding: 0 10px;
+            border-radius: 15px;
+            display: inline-block;
+            transform: rotate(-2deg);
+        }
+        
+        .login-screen .subtitle {
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+            margin-bottom: 40px;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 15px 25px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .login-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        /* Glassmorphism pour tous les conteneurs */
+        .login-option, .task-card, .header, .today-header, .avatar-selection, .modal-content,
+        .teacher-message, .catchup-alert, .calendar-container, .rewards-container {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .login-option {
+            border-radius: 25px;
+            padding: 30px;
+            width: 280px;
+            box-shadow: 0 10px 25px var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            cursor: pointer;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-option:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .login-option.bulle {
+            border-color: var(--primary-yellow);
+        }
+        
+        .login-option.parent {
+            border-color: var(--primary-blue);
+        }
+        
+        .login-option i {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            display: block;
+            transition: transform 0.3s;
+        }
+        
+        .login-option:hover i {
+            transform: scale(1.1);
+        }
+        
+        .login-option.bulle i {
+            color: var(--primary-yellow);
+        }
+        
+        .login-option.parent i {
+            color: var(--primary-blue);
+        }
+        
+        .login-option h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--dark-bg);
+        }
+        
+        .login-option p {
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .avatar-selection {
+            border-radius: 25px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 25px var(--shadow);
+            margin-bottom: 30px;
+            display: none;
+            animation: slideUp 0.5s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .avatar-selection h3 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--dark-bg);
+            font-size: 1.8rem;
+        }
+        
+        .avatar-options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .avatar-option {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            cursor: pointer;
+            border: 4px solid transparent;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .avatar-option:hover, .avatar-option.selected {
+            transform: scale(1.1);
+            border-color: var(--primary-green);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .avatar-option.bee {
+            background-color: #FFF9C4;
+            color: #FF9800;
+        }
+        
+        .avatar-option.rocket {
+            background-color: #E1F5FE;
+            color: #0288D1;
+        }
+        
+        .avatar-option.bubble {
+            background-color: #F3E5F5;
+            color: #7B1FA2;
+        }
+        
+        .avatar-option.star {
+            background-color: #FFF8E1;
+            color: #FFA000;
+        }
+        
+        .code-input {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .code-input input {
+            padding: 15px;
+            font-size: 1.5rem;
+            text-align: center;
+            width: 200px;
+            border-radius: 15px;
+            border: 3px solid var(--primary-blue);
+            font-family: 'Comic Neue', cursive;
+            letter-spacing: 5px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: all 0.3s;
+        }
+        
+        .code-input input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(6, 214, 160, 0.2);
+            transform: scale(1.02);
+        }
+        
+        .code-input button {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .code-input button:hover {
+            background-color: #05B685;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(6, 214, 160, 0.3);
+        }
+        
+        .back-button {
+            background-color: transparent;
+            border: none;
+            color: var(--primary-blue);
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .back-button:hover {
+            background-color: rgba(17, 138, 178, 0.1);
+            transform: translateX(-5px);
+        }
+        
+        /* Écran principal */
+        .main-screen {
+            display: none;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-radius: 25px;
+            box-shadow: 0 5px 15px var(--shadow);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(90deg, var(--primary-yellow), var(--primary-green), var(--primary-blue), var(--primary-purple));
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .header-logo {
+            width: 60px;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .user-avatar:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+        
+        .user-details h2 {
+            font-size: 1.5rem;
+            color: var(--dark-bg);
+        }
+        
+        .user-details p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .header-right {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .share-button, .logout-button {
+            background-color: rgba(248, 249, 250, 0.7);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-blue);
+            font-weight: bold;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .share-button {
+            background-color: rgba(255, 209, 102, 0.7);
+            color: var(--dark-bg);
+        }
+        
+        .share-button:hover {
+            background-color: rgba(255, 209, 102, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 209, 102, 0.3);
+        }
+        
+        .logout-button:hover {
+            background-color: rgba(233, 236, 239, 0.9);
+            transform: translateY(-2px);
+        }
+        
+        .tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow);
+            margin-bottom: 30px;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            color: #666;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tab.active {
+            background-color: var(--primary-yellow);
+            color: var(--dark-bg);
+        }
+        
+        .tab:hover:not(.active) {
+            background-color: rgba(248, 249, 250, 0.7);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Écran Aujourd'hui */
+        .today-header {
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 5px 15px var(--shadow);
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .today-header h2 {
+            font-size: 2.2rem;
+            color: var(--dark-bg);
+            margin-bottom: 10px;
+        }
+        
+        .today-header .date {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .today-header .festive {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2rem;
+            animation: float 3s infinite ease-in-out;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Message de Bonne Année */
+        .new-year-message {
+            background: linear-gradient(135deg, #FFD166, #FF9E6D, #FF6B9D, #9D4EDD);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.3rem;
+            animation: pulseGlow 2s infinite alternate;
+            box-shadow: 0 5px 15px rgba(157, 78, 221, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: none;
+        }
+        
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 5px 15px rgba(157, 78, 221, 0.3);
+                transform: scale(1);
+            }
+            100% {
+                box-shadow: 0 5px 25px rgba(157, 78, 221, 0.6), 0 0 30px rgba(255, 209, 102, 0.4);
+                transform: scale(1.02);
+            }
+        }
+        
+        .new-year-message i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+            animation: spin 3s infinite linear;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .teacher-message {
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-left: 6px solid var(--primary-blue);
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+        
+        .teacher-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(17, 138, 178, 0.3);
+        }
+        
+        .teacher-message-content h4 {
+            color: var(--dark-bg);
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+        
+        .teacher-message-content p {
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        .catchup-alert {
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-left: 6px solid #FFC107;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 193, 7, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
+        }
+        
+        .catchup-alert h4 {
+            color: #856404;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .tasks-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .task-card {
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 5px 15px var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .task-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .task-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        .task-icon.reading {
+            background-color: var(--primary-blue);
+        }
+        
+        .task-icon.math {
+            background-color: var(--primary-green);
+        }
+        
+        .task-icon.copy {
+            background-color: var(--primary-purple);
+        }
+        
+        .task-icon.grammar {
+            background-color: var(--primary-red);
+        }
+        
+        .task-content {
+            flex: 1;
+        }
+        
+        .task-content h4 {
+            font-size: 1.3rem;
+            color: var(--dark-bg);
+            margin-bottom: 8px;
+        }
+        
+        .task-content p {
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .copy-text {
+            background-color: rgba(255, 249, 196, 0.7);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 10px;
+            border-left: 4px solid #FFD166;
+            font-family: 'Comic Neue', cursive;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        .task-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .task-checkbox {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid #ddd;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .task-checkbox.checked {
+            background-color: var(--primary-green);
+            border-color: var(--primary-green);
+            color: white;
+            box-shadow: 0 4px 10px rgba(6, 214, 160, 0.3);
+        }
+        
+        .task-checkbox:hover:not(.checked) {
+            border-color: var(--primary-green);
+            transform: scale(1.05);
+        }
+        
+        .details-button {
+            background-color: rgba(248, 249, 250, 0.7);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 10px;
+            color: var(--primary-blue);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .details-button:hover {
+            background-color: rgba(233, 236, 239, 0.9);
+            transform: translateY(-2px);
+        }
+        
+        /* Écran Calendrier */
+        .calendar-container {
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 5px 15px var(--shadow);
+            margin-bottom: 30px;
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .calendar-header h3 {
+            font-size: 1.8rem;
+            color: var(--dark-bg);
+        }
+        
+        .calendar-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .calendar-nav button {
+            background-color: rgba(248, 249, 250, 0.7);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .calendar-nav button:hover {
+            background-color: rgba(233, 236, 239, 0.9);
+            transform: scale(1.05);
+        }
+        
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .calendar-day-name {
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary-blue);
+            padding: 10px;
+        }
+        
+        .calendar-day {
+            height: 80px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .calendar-day:hover:not(.empty):not(.rest-day) {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+        
+        .calendar-day.empty {
+            visibility: hidden;
+        }
+        
+        .calendar-day.rest-day {
+            background-color: rgba(248, 249, 250, 0.5);
+            color: #999;
+        }
+        
+        .calendar-day.active {
+            background-color: var(--primary-blue);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .calendar-day.partial {
+            background-color: #FFD166;
+        }
+        
+        .calendar-day.complete {
+            background-color: var(--primary-green);
+            color: white;
+        }
+        
+        .calendar-day.pending {
+            background-color: #FFEEB3;
+        }
+        
+        .day-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .day-status {
+            font-size: 0.8rem;
+            margin-top: 5px;
+            text-align: center;
+        }
+        
+        .calendar-legend {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 8px 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+        }
+        
+        .legend-color.rest {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+        }
+        
+        .legend-color.pending {
+            background-color: #FFEEB3;
+        }
+        
+        .legend-color.partial {
+            background-color: #FFD166;
+        }
+        
+        .legend-color.complete {
+            background-color: var(--primary-green);
+        }
+        
+        .legend-color.active {
+            background-color: var(--primary-blue);
+        }
+        
+        /* Écran Récompenses */
+        .rewards-container {
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 5px 15px var(--shadow);
+            margin-bottom: 30px;
+        }
+        
+        .hive-progress {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .hive-progress h3 {
+            font-size: 1.8rem;
+            color: var(--dark-bg);
+            margin-bottom: 20px;
+        }
+        
+        .hive-image {
+            width: 200px;
+            height: 200px;
+            background-color: #8B4513;
+            border-radius: 50% 50% 0 0;
+            position: relative;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 10px solid #5D4037;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .honey-fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #FFD700;
+            height: 0%;
+            transition: height 1s ease;
+        }
+        
+        .progress-text {
+            font-size: 1.2rem;
+            color: var(--dark-bg);
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        .stickers-container {
+            margin-bottom: 40px;
+        }
+        
+        .stickers-container h3 {
+            font-size: 1.8rem;
+            color: var(--dark-bg);
+            margin-bottom: 20px;
+        }
+        
+        .stickers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 20px;
+        }
+        
+        .sticker {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            box-shadow: 0 5px 15px var(--shadow);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s;
+        }
+        
+        .sticker:hover {
+            transform: scale(1.05);
+        }
+        
+        .sticker.locked {
+            filter: grayscale(1);
+            opacity: 0.5;
+        }
+        
+        .sticker.unlocked {
+            animation: bounceIn 0.6s;
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .badges-container {
+            margin-bottom: 40px;
+        }
+        
+        .badges-container h3 {
+            font-size: 1.8rem;
+            color: var(--dark-bg);
+            margin-bottom: 20px;
+        }
+        
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+        }
+        
+        .badge {
+            background: rgba(248, 249, 250, 0.7);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px var(--shadow);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s;
+        }
+        
+        .badge:hover {
+            transform: translateY(-5px);
+        }
+        
+        .badge.locked {
+            filter: grayscale(1);
+            opacity: 0.7;
+        }
+        
+        .badge-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        .badge-name {
+            font-weight: bold;
+            color: var(--dark-bg);
+            text-align: center;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            border-radius: 25px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .modal-close:hover {
+            color: var(--primary-red);
+            background-color: rgba(239, 71, 111, 0.1);
+            transform: rotate(90deg);
+        }
+        
+        .modal h3 {
+            font-size: 1.8rem;
+            color: var(--dark-bg);
+            margin-bottom: 20px;
+        }
+        
+        /* Animations de confirmation */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-green);
+            opacity: 0;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        
+        /* Effet Ripple */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ripple::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            transform: translate(-50%, -50%);
+            animation: rippleAnim 0.6s ease-out;
+            pointer-events: none;
+        }
+        
+        @keyframes rippleAnim {
+            to {
+                width: 300px;
+                height: 300px;
+                opacity: 0;
+            }
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: white;
+            color: #333;
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 10000;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: slideInRight 0.3s ease, fadeOut 0.5s ease 2.5s forwards;
+            max-width: 350px;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+        
+        /* Snowflakes pour effet hivernal - OPTIMISÉ */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: white;
+            font-size: 1rem;
+            opacity: 0.8;
+            pointer-events: none;
+            z-index: 9998;
+            animation: fall linear infinite;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+        
+        /* Modal de partage */
+        .share-modal-content {
+            max-width: 400px;
+        }
+        
+        .share-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .share-option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 15px;
+            background: rgba(248, 249, 250, 0.7);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .share-option:hover {
+            background: rgba(233, 236, 239, 0.9);
+            transform: translateY(-3px);
+            border-color: var(--primary-yellow);
+        }
+        
+        .share-option i {
+            font-size: 1.8rem;
+            width: 40px;
+            text-align: center;
+        }
+        
+        .share-option.facebook i {
+            color: #1877F2;
+        }
+        
+        .share-option.whatsapp i {
+            color: #25D366;
+        }
+        
+        .share-option.print i {
+            color: var(--primary-blue);
+        }
+        
+        .share-preview {
+            background: rgba(248, 249, 250, 0.7);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+            border: 2px dashed var(--primary-yellow);
+        }
+        
+        .share-preview h4 {
+            margin-bottom: 10px;
+            color: var(--dark-bg);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .login-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .header-left {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .header-right {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .share-button, .logout-button {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .user-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .task-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .calendar {
+                grid-template-columns: repeat(7, 1fr);
+                gap: 5px;
+            }
+            
+            .calendar-day {
+                height: 50px;
+                padding: 5px;
+            }
+            
+            .day-number {
+                font-size: 1rem;
+            }
+            
+            .day-status {
+                font-size: 0.6rem;
+            }
+            
+            .login-screen h1 {
+                font-size: 2rem;
+            }
+            
+            .logo {
+                width: 120px;
+            }
+            
+            .header-logo {
+                width: 50px;
+            }
+            
+            .new-year-message {
+                font-size: 1.1rem;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Effet neige OPTIMISÉ -->
+    <div id="snowflakes"></div>
+    
+    <!-- Écran de connexion -->
+    <div class="login-screen" id="loginScreen">
+        <!-- Logo de l'application -->
+        <div class="app-logo-container">
+            <img src="assets/images/logo.png" alt="La Ruche des Vacances" class="logo">
+        </div>
+        
+        <h1>La <span>Ruche</span> des Vacances</h1>
+        <p class="subtitle">Classe de CE1 - M. CODJO J. S. Stein<br>Planning des vacances de Noël 2025-2026</p>
+        
+        <div class="login-options">
+            <div class="login-option bulle ripple" id="studentLogin">
+                <i class="fas fa-child"></i>
+                <h3>Je suis une Super Bulle</h3>
+                <p>Connecte-toi avec ton avatar et ton code personnel pour découvrir tes missions de vacances !</p>
+            </div>
+            
+            <div class="login-option parent ripple" id="parentLogin">
+                <i class="fas fa-users"></i>
+                <h3>Espace Parents/Profs</h3>
+                <p>Accédez au suivi de progression et aux paramètres de l'application.</p>
+            </div>
+        </div>
+        
+        <div class="avatar-selection" id="avatarSelection">
+            <h3>Choisis ton avatar</h3>
+            <div class="avatar-options">
+                <div class="avatar-option bee ripple" data-avatar="bee">
+                    <i class="fas fa-bee"></i>
+                </div>
+                <div class="avatar-option rocket ripple" data-avatar="rocket">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div class="avatar-option bubble ripple" data-avatar="bubble">
+                    <i class="fas fa-bubble"></i>
+                </div>
+                <div class="avatar-option star ripple" data-avatar="star">
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+            
+            <div class="code-input">
+                <p>Entre ton code famille (4 chiffres)</p>
+                <input type="text" id="familyCode" maxlength="4" placeholder="0000">
+                <button id="connectButton" class="ripple">Se connecter</button>
+                <button class="back-button ripple" id="backToLogin">
+                    <i class="fas fa-arrow-left"></i> Retour
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Écran principal -->
+    <div class="main-screen" id="mainScreen">
+        <div class="app-container">
+            <!-- En-tête avec informations utilisateur -->
+            <div class="header">
+                <div class="header-left">
+                    <img src="assets/images/logo.png" alt="La Ruche des Vacances" class="header-logo">
+                    <div class="user-info">
+                        <div class="user-avatar ripple" id="userAvatarDisplay">
+                            <i class="fas fa-bee"></i>
+                        </div>
+                        <div class="user-details">
+                            <h2 id="userName">Super Bulle</h2>
+                            <p id="userClass">CE1 - Classe de M. CODJO</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <button class="share-button ripple" id="shareButton">
+                        <i class="fas fa-share-alt"></i> Partager
+                    </button>
+                    <button class="logout-button ripple" id="logoutButton">
+                        <i class="fas fa-sign-out-alt"></i> Déconnexion
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Onglets de navigation -->
+            <div class="tabs">
+                <div class="tab active ripple" data-tab="today">Aujourd'hui</div>
+                <div class="tab ripple" data-tab="calendar">Calendrier</div>
+                <div class="tab ripple" data-tab="rewards">Récompenses</div>
+            </div>
+            
+            <!-- Contenu de l'onglet Aujourd'hui -->
+            <div class="tab-content active" id="todayTab">
+                <div class="today-header">
+                    <h2>Missions du jour</h2>
+                    <div class="date" id="currentDate">Lundi 22 décembre 2025</div>
+                    <div class="festive" id="festiveIcon">🎄</div>
+                </div>
+                
+                <!-- Message de Bonne Année -->
+                <div class="new-year-message" id="newYearMessage">
+                    <i class="fas fa-glass-cheers"></i>
+                    <div id="newYearText">Bonne Année 2026 ! 🎉 Que cette nouvelle année soit remplie de succès et de joie dans tes apprentissages !</div>
+                </div>
+                
+                <!-- Message de l'enseignant -->
+                <div class="teacher-message">
+                    <div class="teacher-avatar">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="teacher-message-content">
+                        <h4>Message de M. CODJO</h4>
+                        <p id="teacherMessage">Bonjour ! Prêt pour une petite mission ? N'oublie pas de bien former tes lettres en copiant. 🖋️</p>
+                    </div>
+                </div>
+                
+                <!-- Alerte de rattrapage -->
+                <div class="catchup-alert" id="catchupAlert" style="display: none;">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Missions à rattraper</h4>
+                    <p id="catchupTasks">Tu as des missions non terminées hier. Pense à les faire avant de commencer celles d'aujourd'hui !</p>
+                </div>
+                
+                <!-- Liste des missions du jour -->
+                <div class="tasks-container" id="todayTasks">
+                    <!-- Les tâches seront ajoutées dynamiquement ici -->
+                </div>
+            </div>
+            
+            <!-- Contenu de l'onglet Calendrier -->
+            <div class="tab-content" id="calendarTab">
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <h3 id="calendarMonth">Décembre 2025</h3>
+                        <div class="calendar-nav">
+                            <button id="prevMonth" class="ripple"><i class="fas fa-chevron-left"></i></button>
+                            <button id="nextMonth" class="ripple"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="calendar" id="calendarGrid">
+                        <!-- Le calendrier sera généré dynamiquement ici -->
+                    </div>
+                    
+                    <div class="calendar-legend">
+                        <div class="legend-item">
+                            <div class="legend-color rest"></div>
+                            <span>Repos</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color pending"></div>
+                            <span>À faire</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color partial"></div>
+                            <span>En partie</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color complete"></div>
+                            <span>Terminé</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color active"></div>
+                            <span>Aujourd'hui</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contenu de l'onglet Récompenses -->
+            <div class="tab-content" id="rewardsTab">
+                <div class="rewards-container">
+                    <div class="hive-progress">
+                        <h3>Ma Ruche</h3>
+                        <div class="hive-image">
+                            <div class="honey-fill" id="honeyFill" style="height: 0%;"></div>
+                        </div>
+                        <div class="progress-text" id="progressText">Progression : 0%</div>
+                    </div>
+                    
+                    <div class="stickers-container">
+                        <h3>Mes Stickers</h3>
+                        <div class="stickers-grid" id="stickersGrid">
+                            <!-- Les stickers seront ajoutés dynamiquement ici -->
+                        </div>
+                    </div>
+                    
+                    <div class="badges-container">
+                        <h3>Mes Badges</h3>
+                        <div class="badges-grid" id="badgesGrid">
+                            <!-- Les badges seront ajoutés dynamiquement ici -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal pour les détails de mission -->
+    <div class="modal" id="taskModal">
+        <div class="modal-content">
+            <button class="modal-close ripple" id="closeModal"><i class="fas fa-times"></i></button>
+            <h3 id="modalTaskTitle">Détails de la mission</h3>
+            <div id="modalTaskContent">
+                <!-- Le contenu de la mission sera ajouté dynamiquement ici -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal pour le partage -->
+    <div class="modal" id="shareModal">
+        <div class="modal-content share-modal-content">
+            <button class="modal-close ripple" id="closeShareModal"><i class="fas fa-times"></i></button>
+            <h3>Partager mon succès</h3>
+            <p>Partage ta progression avec tes parents ou tes amis !</p>
+            
+            <div class="share-preview">
+                <h4>Ma progression</h4>
+                <p id="shareProgressText">Progression : 0%</p>
+                <p id="shareStickersText">Stickers : 0/10</p>
+                <p id="shareBadgesText">Badges : 0/5</p>
+            </div>
+            
+            <div class="share-options">
+                <div class="share-option facebook ripple" id="shareFacebook">
+                    <i class="fab fa-facebook"></i>
+                    <div>
+                        <strong>Partager sur Facebook</strong>
+                        <p>Partage avec ta famille</p>
+                    </div>
+                </div>
+                
+                <div class="share-option whatsapp ripple" id="shareWhatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                    <div>
+                        <strong>Partager sur WhatsApp</strong>
+                        <p>Envoie à tes proches</p>
+                    </div>
+                </div>
+                
+                <div class="share-option print ripple" id="sharePrint">
+                    <i class="fas fa-print"></i>
+                    <div>
+                        <strong>Imprimer</strong>
+                        <p>Garde un souvenir papier</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Données de l'application avec sauvegarde locale
+        const appData = {
+            currentUser: null,
+            currentDate: new Date(),
+            selectedAvatar: 'bee',
+            tasksCompleted: JSON.parse(localStorage.getItem('tasksCompleted')) || {},
+            stickersUnlocked: JSON.parse(localStorage.getItem('stickersUnlocked')) || [],
+            badgesUnlocked: JSON.parse(localStorage.getItem('badgesUnlocked')) || [],
+            currentTab: 'today',
+            enableSnowEffect: true,
+            snowflakes: [],
+            maxSnowflakes: 25,
+            snowflakeInterval: null
+        };
+
+        // Données du planning
+        const vacationPlanning = {
+            startDate: new Date(2025, 11, 20),
+            endDate: new Date(2026, 0, 4),
+            restDays: [
+                '2025-12-24', '2025-12-25', '2025-12-31', '2026-01-01'
+            ],
+            tasksByDate: {
+                '2025-12-20': [
+                    { 
+                        id: 'task-1-1',
+                        type: 'reading',
+                        title: 'Lecture',
+                        description: 'Je lis tout seul – Pages 30 et 31',
+                        details: 'Lis les pages 30 et 31 à voix haute. Explique l\'histoire en 2 phrases à un adulte.'
+                    },
+                    { 
+                        id: 'task-1-2',
+                        type: 'math',
+                        title: 'Mathématiques',
+                        description: 'Je fais le point – Page 12',
+                        details: 'Fais les exercices de la page 12 de ton manuel de mathématiques.'
+                    },
+                    { 
+                        id: 'task-1-3',
+                        type: 'copy',
+                        title: 'Copie',
+                        description: 'Pour préserver une santé optimale, il est important de pratiquer une activité physique régulière et de manger des aliments équilibrés tous les jours.',
+                        details: 'Copie cette phrase 2 ou 3 fois sur ton cahier de copie, en faisant attention à la forme des lettres.'
+                    }
+                ],
+                '2025-12-21': [
+                    { 
+                        id: 'task-2-1',
+                        type: 'reading',
+                        title: 'Lecture',
+                        description: 'Je lis tout seul – Pages 32 et 33',
+                        details: 'Lis les pages 32 et 33 silencieusement. Quel est ton passage préféré ?'
+                    },
+                    { 
+                        id: 'task-2-2',
+                        type: 'grammar',
+                        title: 'Français Yaslo',
+                        description: 'Pages 36-37',
+                        details: 'Fais les exercices des pages 36 et 37 de ton cahier Yaslo.'
+                    },
+                    { 
+                        id: 'task-2-3',
+                        type: 'copy',
+                        title: 'Copie',
+                        description: 'Afin de protéger notre environnement naturel, nous devons recycler nos déchets et éviter le gaspillage inutile de l\'eau précieuse.',
+                        details: 'Copie cette phrase 2 ou 3 fois sur ton cahier de copie, en faisant attention aux majuscules et aux points.'
+                    }
+                ],
+                '2025-12-22': [
+                    { 
+                        id: 'task-3-1',
+                        type: 'math',
+                        title: 'Mathématiques',
+                        description: 'Je m\'entraîne – Page 39',
+                        details: 'Fais les exercices de la page 39 de ton manuel de mathématiques.'
+                    },
+                    { 
+                        id: 'task-3-2',
+                        type: 'math',
+                        title: 'Mathématiques Yaslo',
+                        description: 'Pages 59-60',
+                        details: 'Fais les exercices des pages 59 et 60 de ton cahier Yaslo de mathématiques.'
+                    },
+                    { 
+                        id: 'task-3-3',
+                        type: 'reading',
+                        title: 'Lecture',
+                        description: 'Je lis tout seul – Page 36',
+                        details: 'Lis la page 36 à voix haute. Demande à un adulte de te poser une question sur le texte.'
+                    },
+                    { 
+                        id: 'task-3-4',
+                        type: 'copy',
+                        title: 'Copie',
+                        description: 'Lorsque l\'on se sent fatigué, un bon sommeil réparateur et une alimentation saine permettent de retrouver rapidement de l\'énergie.',
+                        details: 'Copie cette phrase 2 ou 3 fois sur ton cahier de copie.'
+                    }
+                ],
+                '2025-12-23': [
+                    { 
+                        id: 'task-4-1',
+                        type: 'reading',
+                        title: 'Lecture',
+                        description: 'Je lis tout seul – Pages 37 et 38',
+                        details: 'Lis les pages 37 et 38. Qui sont les personnages principaux ?'
+                    },
+                    { 
+                        id: 'task-4-2',
+                        type: 'math',
+                        title: 'Mathématiques',
+                        description: 'Je fais le point – Page 20',
+                        details: 'Fais les exercices de la page 20 de ton manuel de mathématiques.'
+                    },
+                    { 
+                        id: 'task-4-3',
+                        type: 'copy',
+                        title: 'Copie',
+                        description: 'Les forêts sont des trésors précieux car elles abritent de nombreux animaux et combattent la pollution de l\'air.',
+                        details: 'Copie cette phrase 2 ou 3 fois sur ton cahier de copie.'
+                    }
+                ],
+                '2025-12-26': [
+                    { 
+                        id: 'task-5-1',
+                        type: 'reading',
+                        title: 'Lecture',
+                        description: 'Je lis tout seul – Pages 39 et 40',
+                        details: 'Lis les pages 39 et 40. Que se passe-t-il dans l\'histoire ?'
+                    },
+                    { 
+                        id: 'task-5-2',
+                        type: 'grammar',
+                        title: 'Français Yaslo',
+                        description: 'Pages 38-39',
+                        details: 'Fais les exercices des pages 38 et 39 de ton cahier Yaslo.'
+                    },
+                    { 
+                        id: 'task-5-3',
+                        type: 'copy',
+                        title: 'Copie',
+                        description: 'Se laver les mains soigneusement avec du savon aide à éviter les maladies et à rester en bonne santé toute l\'année.',
+                        details: 'Copie cette phrase 2 ou 3 fois sur ton cahier de copie.'
+                    }
+                ],
+                '2025-12-27': [
+                    { 
+                        id: 'task-6-1',
+                        type: 'math',
+                        title: 'Mathématiques',
+                        description: 'Je fais le point – Page 30',
+                        details: 'Fais les exercices de la page 30 de ton manuel de mathématiques.'
+                    },
+                    { 
+                        id: 'task-6-2',
+                        type: 'grammar',
+                        title: 'Grammaire ES/EST',
+                        description: 'Yaslo ES-EST – Page 14',
+                        details: 'Fais les exercices de la page 14 de ton cahier Yaslo sur ES et EST.'
+                    },
+                    { 
+                        id: 'task-6-3',
+                        type: 'copy',
+                        title: 'Copie',
+                        description: 'Le réchauffement climatique menace les animaux sauvages, c\'est pourquoi nous devons réduire notre consommation d\'énergie.',
+                        details: 'Copie cette phrase 2 ou 3 fois sur ton cahier de copie.'
+                    }
+                ],
+                '2025-12-28': [
+                    { 
+                        id: 'task-7-1',
+                        type: 'reading',
+                        title: 'Lecture',
+                        description: 'Je lis tout seul – Pages 41 et 42',
+                        details: 'Lis les pages 41 et 42. Comment l\'histoire se termine-t-elle ?'
+                    },
+                    { 
+                        id: 'task-7-2',
+                        type: 'math',
+                        title: 'Mathématiques',
+                        description: 'Je m\'entraîne – Page 46',
+                        details: 'Fais les exercices de la page 46 de ton manuel de mathématiques.'
+                    },
+                    { 
+                        id: 'task-7-3',
+                        type: 'copy',
+                        title: 'Copie',
+                        description: 'Marcher ou faire du vélo chaque jour renforce les muscles et améliore grandement le bien-être du corps et de l\'esprit.',
+                        details: 'Copie cette phrase 2 ou 3 fois sur ton cahier de copie.'
+                    }
+                ],
+                '2025-12-29': [
+                    { 
+                        id: 'task-8-1',
+                        type: 'grammar',
+                        title: 'Français Yaslo',
+                        description: 'Pages 40 et 41',
+                        details: 'Fais les exercices des pages 40 et 41 de ton cahier Yaslo.'
+                    },
+                    { 
+                        id: 'task-8-2',
+                        type: 'math',
+                        title: 'Mathématiques',
+                        description: 'Je fais le point – Page 34',
+                        details: 'Fais les exercices de la page 34 de ton manuel de mathématiques.'
+                    },
+                    { 
+                        id: 'task-8-3',
+                        type: 'copy',
+                        title: 'Copie',
+                        description: 'En triant soigneusement le verre, le plastique et le papier, chaque famille participe à la protection de notre belle planète.',
+                        details: 'Copie cette phrase 2 ou 3 fois sur ton cahier de copie.'
+                    }
+                ],
+                '2025-12-30': [
+                    { 
+                        id: 'task-9-1',
+                        type: 'reading',
+                        title: 'Lecture',
+                        description: 'Je lis tout seul – Page 43',
+                        details: 'Lis la page 43. C\'est la dernière page de l\'histoire !'
+                    },
+                    { 
+                        id: 'task-9-2',
+                        type: 'math',
+                        title: 'Mathématiques',
+                        description: 'Je m\'entraîne – Page 47',
+                        details: 'Fais les exercices de la page 47 de ton manuel de mathématiques.'
+                    },
+                    { 
+                        id: 'task-9-3',
+                        type: 'grammar',
+                        title: 'Grammaire ES/EST',
+                        description: 'Yaslo ES-EST – Page 88',
+                        details: 'Fais les exercices de la page 88 de ton cahier Yaslo sur ES et EST.'
+                    },
+                    { 
+                        id: 'task-9-4',
+                        type: 'copy',
+                        title: 'Copie',
+                        description: 'Les fruits et légumes frais sont riches en vitamines essentielles qui aident notre organisme à lutter contre les petits rhumes de l\'hiver.',
+                        details: 'Copie cette phrase 2 ou 3 fois sur ton cahier de copie.'
+                    }
+                ],
+                '2026-01-02': [
+                    { 
+                        id: 'task-10-1',
+                        type: 'math',
+                        title: 'Mathématiques',
+                        description: 'Je fais le point – Page 45',
+                        details: 'Fais les exercices de la page 45 de ton manuel de mathématiques.'
+                    },
+                    { 
+                        id: 'task-10-2',
+                        type: 'math',
+                        title: 'Mathématiques',
+                        description: 'Je m\'entraîne – Page 58',
+                        details: 'Fais les exercices de la page 58 de ton manuel de mathématiques.'
+                    },
+                    { 
+                        id: 'task-10-3',
+                        type: 'copy',
+                        title: 'Copie',
+                        description: 'La biodiversité est menacée par la déforestation, il faut donc planter des arbres pour sauvegarder la nature.',
+                        details: 'Copie cette phrase 2 ou 3 fois sur ton cahier de copie.'
+                    }
+                ],
+                '2026-01-03': [
+                    { 
+                        id: 'task-11-1',
+                        type: 'reading',
+                        title: 'Révision lecture',
+                        description: 'Relire une page de lecture préférée des vacances',
+                        details: 'Choisis la page d\'histoire que tu as préférée pendant les vacances et relis-la pour le plaisir.'
+                    },
+                    { 
+                        id: 'task-11-2',
+                        type: 'copy',
+                        title: 'Copie (facultative)',
+                        description: 'Prendre le temps de bien respirer et de se détendre permet de gérer ses émotions et de rester calme dans toutes les situations.',
+                        details: 'Copie cette phrase 2 ou 3 fois sur ton cahier de copie si tu en as envie.'
+                    }
+                ]
+            }
+        };
+
+        // Messages de l'enseignant
+        const teacherMessages = {
+            '2025-12-20': 'Bonjour ! Prêt pour les premières missions de vacances ? Amuse-toi bien ! 🚀',
+            '2025-12-21': 'Super travail hier ! Aujourd\'hui, prends ton temps pour bien lire et copier. 📚',
+            '2025-12-22': 'C\'est lundi ! Un petit échauffement mathématique pour commencer la semaine. 🧮',
+            '2025-12-23': 'Dernier jour avant Noël ! Profite bien de tes lectures. 🎄',
+            '2025-12-26': 'J\'espère que tu as passé un beau Noël ! Reprenons doucement avec quelques exercices. ✨',
+            '2025-12-27': 'Attention aujourd\'hui à la différence entre ES et EST ! C\'est important. 🔤',
+            '2025-12-28': 'Bravo pour ta persévérance ! Encore quelques jours avant la nouvelle année. 🌟',
+            '2025-12-29': 'Pense à bien trier le verre, le plastique et le papier chez toi ! 🌍',
+            '2025-12-30': 'Dernière ligne droite avant le réveillon ! Tu es sur la bonne voie. 🥂',
+            '2026-01-02': 'Bonne année 2026 ! Reprenons en douceur après les fêtes. 🎉',
+            '2026-01-03': 'Dernier jour de missions ! Tu as été formidable pendant ces vacances. 👏'
+        };
+
+        // Données des récompenses
+        const stickers = [
+            { id: 'sticker-1', icon: '🐝', name: 'Abeille travailleuse', dayRequired: 1 },
+            { id: 'sticker-2', icon: '📚', name: 'Lecteur assidu', dayRequired: 2 },
+            { id: 'sticker-3', icon: '🧮', name: 'As des maths', dayRequired: 3 },
+            { id: 'sticker-4', icon: '✏️', name: 'Copieur pro', dayRequired: 4 },
+            { id: 'sticker-5', icon: '🌍', name: 'Protecteur de la planète', dayRequired: 5 },
+            { id: 'sticker-6', icon: '🏃', name: 'Sportif en herbe', dayRequired: 6 },
+            { id: 'sticker-7', icon: '🎄', name: 'Esprit de Noël', dayRequired: 7 },
+            { id: 'sticker-8', icon: '✨', name: 'Étoile montante', dayRequired: 8 },
+            { id: 'sticker-9', icon: '🚀', name: 'Super Bulle', dayRequired: 9 },
+            { id: 'sticker-10', icon: '🏆', name: 'Champion des vacances', dayRequired: 10 }
+        ];
+
+        const badges = [
+            { id: 'badge-1', icon: '📖', name: 'Lecteur de la semaine', color: '#118AB2', condition: 'complete5Reading' },
+            { id: 'badge-2', icon: '🧮', name: 'Mathématicien expert', color: '#06D6A0', condition: 'complete5Math' },
+            { id: 'badge-3', icon: '✏️', name: 'Maître de la copie', color: '#9D4EDD', condition: 'complete5Copy' },
+            { id: 'badge-4', icon: '🌿', name: 'Éco-héros', color: '#4CAF50', condition: 'completeAllEcoCopy' },
+            { id: 'badge-5', icon: '⭐', name: 'Super Bulle d\'Or', color: '#FFD166', condition: 'completeAllTasks' }
+        ];
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            initLoginScreen();
+            initMainScreen();
+            initVisualEffects();
+            
+            // Vérifier la connexion existante
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                appData.currentUser = JSON.parse(savedUser);
+                showMainScreen();
+            }
+        });
+
+        // Initialisation des effets visuels
+        function initVisualEffects() {
+            // Effet ripple
+            document.addEventListener('click', function(e) {
+                let target = e.target;
+                while (target && target !== document) {
+                    if (target.classList.contains('ripple')) {
+                        createRippleEffect(target, e);
+                        break;
+                    }
+                    target = target.parentElement;
+                }
+            });
+            
+            // Effet neige optimisé
+            if (appData.enableSnowEffect && isDecemberOrJanuary()) {
+                if (appData.snowflakeInterval) {
+                    clearInterval(appData.snowflakeInterval);
+                }
+                startSnowEffect();
+            }
+        }
+
+        // Effet neige
+        function startSnowEffect() {
+            const snowflakesContainer = document.getElementById('snowflakes');
+            if (!snowflakesContainer) return;
+            
+            snowflakesContainer.innerHTML = '';
+            appData.snowflakes = [];
+            
+            const snowflakeCount = Math.min(25, Math.floor(window.innerWidth / 40));
+            
+            for (let i = 0; i < snowflakeCount; i++) {
+                createSnowflake();
+            }
+            
+            appData.snowflakeInterval = setInterval(recycleSnowflakes, 100);
+            
+            const now = new Date();
+            if (now.getMonth() === 0 && now.getDate() > 15) {
+                setTimeout(() => {
+                    clearInterval(appData.snowflakeInterval);
+                    snowflakesContainer.innerHTML = '';
+                    appData.snowflakes = [];
+                }, 10000);
+            }
+        }
+
+        function createSnowflake() {
+            const snowflakesContainer = document.getElementById('snowflakes');
+            if (!snowflakesContainer || appData.snowflakes.length >= appData.maxSnowflakes) return;
+            
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄';
+            
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.fontSize = (Math.random() * 15 + 8) + 'px';
+            snowflake.style.opacity = Math.random() * 0.6 + 0.2;
+            snowflake.style.animationDuration = (Math.random() * 8 + 6) + 's';
+            snowflake.style.animationDelay = Math.random() * 5 + 's';
+            
+            const snowflakeData = {
+                element: snowflake,
+                duration: parseFloat(snowflake.style.animationDuration) * 1000,
+                startTime: Date.now()
+            };
+            
+            appData.snowflakes.push(snowflakeData);
+            snowflakesContainer.appendChild(snowflake);
+            
+            setTimeout(() => {
+                if (snowflake.parentNode) {
+                    snowflake.parentNode.removeChild(snowflake);
+                    const index = appData.snowflakes.indexOf(snowflakeData);
+                    if (index > -1) appData.snowflakes.splice(index, 1);
+                }
+            }, snowflakeData.duration + 1000);
+        }
+
+        function recycleSnowflakes() {
+            if (appData.snowflakes.length < appData.maxSnowflakes && Math.random() > 0.7) {
+                createSnowflake();
+            }
+            
+            const now = Date.now();
+            for (let i = appData.snowflakes.length - 1; i >= 0; i--) {
+                const flake = appData.snowflakes[i];
+                if (now - flake.startTime > flake.duration + 1000) {
+                    if (flake.element.parentNode) flake.element.parentNode.removeChild(flake.element);
+                    appData.snowflakes.splice(i, 1);
+                }
+            }
+        }
+
+        function stopSnowEffect() {
+            if (appData.snowflakeInterval) {
+                clearInterval(appData.snowflakeInterval);
+                appData.snowflakeInterval = null;
+            }
+            
+            const snowflakesContainer = document.getElementById('snowflakes');
+            if (snowflakesContainer) snowflakesContainer.innerHTML = '';
+            appData.snowflakes = [];
+        }
+
+        function createRippleEffect(element, event) {
+            if (element.tagName === 'INPUT') return;
+            
+            const ripple = document.createElement('span');
+            const rect = element.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = event.clientX - rect.left - size / 2;
+            const y = event.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255,255,255,0.6);
+                transform: scale(0);
+                animation: rippleAnim 0.6s ease-out;
+                pointer-events: none;
+                width: ${size}px;
+                height: ${size}px;
+                left: ${x}px;
+                top: ${y}px;
+            `;
+            
+            element.style.position = 'relative';
+            element.style.overflow = 'hidden';
+            element.appendChild(ripple);
+            
+            setTimeout(() => {
+                if (ripple.parentNode) ripple.parentNode.removeChild(ripple);
+            }, 600);
+        }
+
+        // Utilitaires
+        function isDecemberOrJanuary() {
+            const now = new Date();
+            const month = now.getMonth();
+            return month === 11 || month === 0;
+        }
+
+        function isNewYear() {
+            const now = new Date();
+            return now.getFullYear() >= 2026 && now.getMonth() === 0;
+        }
+
+        // Écran de connexion
+        function initLoginScreen() {
+            document.getElementById('studentLogin').addEventListener('click', function() {
+                document.getElementById('avatarSelection').style.display = 'block';
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => this.style.transform = '', 300);
+            });
+            
+            document.getElementById('parentLogin').addEventListener('click', function() {
+                showNotification('Espace parents/profs en cours de développement.');
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => this.style.transform = '', 300);
+            });
+            
+            document.querySelectorAll('.avatar-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.avatar-option').forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    appData.selectedAvatar = this.getAttribute('data-avatar');
+                    playClickSound();
+                });
+            });
+            
+            document.getElementById('connectButton').addEventListener('click', function() {
+                const code = document.getElementById('familyCode').value;
+                if (code.length !== 4 || isNaN(code)) {
+                    showNotification('Le code doit être composé de 4 chiffres !');
+                    return;
+                }
+                
+                appData.currentUser = {
+                    avatar: appData.selectedAvatar,
+                    name: getAvatarName(appData.selectedAvatar),
+                    code: code
+                };
+                
+                localStorage.setItem('currentUser', JSON.stringify(appData.currentUser));
+                
+                document.getElementById('loginScreen').style.opacity = '0';
+                document.getElementById('loginScreen').style.transition = 'opacity 0.3s';
+                
+                setTimeout(() => {
+                    showMainScreen();
+                    document.getElementById('loginScreen').style.opacity = '1';
+                }, 300);
+            });
+            
+            document.getElementById('familyCode').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') document.getElementById('connectButton').click();
+            });
+            
+            document.getElementById('backToLogin').addEventListener('click', function() {
+                document.getElementById('avatarSelection').style.display = 'none';
+                playClickSound();
+            });
+        }
+
+        // Écran principal
+        function initMainScreen() {
+            // Bouton de partage
+            document.getElementById('shareButton').addEventListener('click', function() {
+                showShareModal();
+            });
+            
+            // Bouton de déconnexion
+            document.getElementById('logoutButton').addEventListener('click', function() {
+                localStorage.removeItem('currentUser');
+                appData.currentUser = null;
+                stopSnowEffect();
+                
+                document.getElementById('mainScreen').style.opacity = '0';
+                document.getElementById('mainScreen').style.transition = 'opacity 0.3s';
+                
+                setTimeout(() => {
+                    showLoginScreen();
+                    document.getElementById('mainScreen').style.opacity = '1';
+                }, 300);
+            });
+            
+            // Onglets
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    playClickSound();
+                    
+                    const tabId = this.getAttribute('data-tab');
+                    appData.currentTab = tabId;
+                    
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    document.getElementById(tabId + 'Tab').classList.add('active');
+                    
+                    if (tabId === 'today') {
+                        updateTodayScreen();
+                    } else if (tabId === 'calendar') {
+                        updateCalendar();
+                    } else if (tabId === 'rewards') {
+                        updateRewards();
+                    }
+                });
+            });
+            
+            // Calendrier
+            document.getElementById('prevMonth').addEventListener('click', function() {
+                appData.currentDate.setMonth(appData.currentDate.getMonth() - 1);
+                updateCalendar();
+                playClickSound();
+            });
+            
+            document.getElementById('nextMonth').addEventListener('click', function() {
+                appData.currentDate.setMonth(appData.currentDate.getMonth() + 1);
+                updateCalendar();
+                playClickSound();
+            });
+            
+            // Modals
+            document.getElementById('closeModal').addEventListener('click', function() {
+                document.getElementById('taskModal').classList.remove('active');
+                playClickSound();
+            });
+            
+            document.getElementById('taskModal').addEventListener('click', function(e) {
+                if (e.target === this) this.classList.remove('active');
+            });
+            
+            document.getElementById('closeShareModal').addEventListener('click', function() {
+                document.getElementById('shareModal').classList.remove('active');
+                playClickSound();
+            });
+            
+            document.getElementById('shareModal').addEventListener('click', function(e) {
+                if (e.target === this) this.classList.remove('active');
+            });
+            
+            // Options de partage
+            document.getElementById('shareFacebook').addEventListener('click', function() {
+                shareOnFacebook();
+            });
+            
+            document.getElementById('shareWhatsapp').addEventListener('click', function() {
+                shareOnWhatsApp();
+            });
+            
+            document.getElementById('sharePrint').addEventListener('click', function() {
+                printProgress();
+            });
+        }
+
+        function showLoginScreen() {
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('mainScreen').style.display = 'none';
+            document.getElementById('avatarSelection').style.display = 'none';
+            document.getElementById('familyCode').value = '';
+            
+            if (appData.enableSnowEffect && isDecemberOrJanuary()) {
+                setTimeout(startSnowEffect, 100);
+            }
+        }
+
+        function showMainScreen() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('mainScreen').style.display = 'block';
+            updateUserInfo();
+            updateTodayScreen();
+            updateCalendar();
+            updateRewards();
+        }
+
+        function updateUserInfo() {
+            if (!appData.currentUser) return;
+            
+            const avatarDisplay = document.getElementById('userAvatarDisplay');
+            avatarDisplay.className = 'user-avatar ripple';
+            
+            let avatarIcon = 'fa-bee';
+            let avatarColor = '#FFD166';
+            
+            switch(appData.currentUser.avatar) {
+                case 'bee': avatarIcon = 'fa-bee'; avatarColor = '#FFD166'; break;
+                case 'rocket': avatarIcon = 'fa-rocket'; avatarColor = '#118AB2'; break;
+                case 'bubble': avatarIcon = 'fa-bubble'; avatarColor = '#9D4EDD'; break;
+                case 'star': avatarIcon = 'fa-star'; avatarColor = '#FFD166'; break;
+            }
+            
+            avatarDisplay.innerHTML = `<i class="fas ${avatarIcon}"></i>`;
+            avatarDisplay.style.backgroundColor = avatarColor;
+            document.getElementById('userName').textContent = appData.currentUser.name;
+        }
+
+        function updateTodayScreen() {
+            const currentDateStr = formatDate(appData.currentDate);
+            document.getElementById('currentDate').textContent = formatDateDisplay(appData.currentDate);
+            
+            const festiveIcon = document.getElementById('festiveIcon');
+            const month = appData.currentDate.getMonth();
+            const day = appData.currentDate.getDate();
+            
+            if ((month === 11 && day >= 24) || (month === 0 && day <= 1)) {
+                festiveIcon.textContent = '🎄';
+            } else if (month === 0 && day === 1) {
+                festiveIcon.textContent = '🎉';
+            } else {
+                festiveIcon.textContent = '✨';
+            }
+            
+            const newYearMessage = document.getElementById('newYearMessage');
+            if (isNewYear()) {
+                newYearMessage.style.display = 'block';
+                const newYearMessages = [
+                    "Bonne Année 2026 ! 🎉 Que cette nouvelle année soit remplie de succès et de joie dans tes apprentissages !",
+                    "Meilleurs vœux pour 2026 ! ✨ Que cette année t'apporte plein de nouvelles connaissances et de beaux moments !",
+                    "Bonne année mon petit Super Bulle ! 🥳 Que 2026 soit une année merveilleuse pour toi !",
+                    "🎊 Bonne Année 2026 ! 🎊 Que tes efforts soient récompensés et que tu progresses encore plus cette année !"
+                ];
+                document.getElementById('newYearText').textContent = newYearMessages[Math.floor(Math.random() * newYearMessages.length)];
+            } else {
+                newYearMessage.style.display = 'none';
+            }
+            
+            const message = teacherMessages[currentDateStr] || 'Bon courage pour tes missions du jour ! Tu peux le faire ! 💪';
+            document.getElementById('teacherMessage').textContent = message;
+            
+            const yesterday = new Date(appData.currentDate);
+            yesterday.setDate(yesterday.getDate() - 1);
+            const yesterdayStr = formatDate(yesterday);
+            
+            let catchupTasks = [];
+            if (vacationPlanning.tasksByDate[yesterdayStr]) {
+                catchupTasks = vacationPlanning.tasksByDate[yesterdayStr].filter(task => {
+                    return !appData.tasksCompleted[task.id];
+                });
+            }
+            
+            const catchupAlert = document.getElementById('catchupAlert');
+            if (catchupTasks.length > 0) {
+                catchupAlert.style.display = 'block';
+                document.getElementById('catchupTasks').textContent = 
+                    `Tu as ${catchupTasks.length} mission${catchupTasks.length > 1 ? 's' : ''} non terminée${catchupTasks.length > 1 ? 's' : ''} d'hier. Pense à les faire avant de commencer celles d'aujourd'hui !`;
+            } else {
+                catchupAlert.style.display = 'none';
+            }
+            
+            updateTodayTasks(currentDateStr);
+        }
+
+        function updateTodayTasks(dateStr) {
+            const todayTasksContainer = document.getElementById('todayTasks');
+            todayTasksContainer.innerHTML = '';
+            
+            if (vacationPlanning.restDays.includes(dateStr)) {
+                todayTasksContainer.innerHTML = `
+                    <div class="task-card" style="text-align: center; padding: 40px;">
+                        <div style="font-size: 4rem; margin-bottom: 20px;">🎄</div>
+                        <h3 style="color: var(--primary-blue); margin-bottom: 10px;">Jour de repos !</h3>
+                        <p style="color: #666;">Profite bien de cette journée de vacances sans exercices.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const tasks = vacationPlanning.tasksByDate[dateStr];
+            
+            if (!tasks || tasks.length === 0) {
+                todayTasksContainer.innerHTML = `
+                    <div class="task-card" style="text-align: center; padding: 40px;">
+                        <div style="font-size: 4rem; margin-bottom: 20px;">✨</div>
+                        <h3 style="color: var(--primary-blue); margin-bottom: 10px;">Aucune mission aujourd'hui</h3>
+                        <p style="color: #666;">Profite de ta journée !</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            tasks.forEach(task => {
+                const taskCard = document.createElement('div');
+                taskCard.className = 'task-card ripple';
+                
+                let taskIcon = 'fa-book';
+                let taskIconClass = 'reading';
+                
+                switch(task.type) {
+                    case 'reading': taskIcon = 'fa-book'; taskIconClass = 'reading'; break;
+                    case 'math': taskIcon = 'fa-calculator'; taskIconClass = 'math'; break;
+                    case 'copy': taskIcon = 'fa-pen'; taskIconClass = 'copy'; break;
+                    case 'grammar': taskIcon = 'fa-spell-check'; taskIconClass = 'grammar'; break;
+                }
+                
+                const isCompleted = appData.tasksCompleted[task.id] || false;
+                
+                taskCard.innerHTML = `
+                    <div class="task-icon ${taskIconClass}">
+                        <i class="fas ${taskIcon}"></i>
+                    </div>
+                    <div class="task-content">
+                        <h4>${task.title}</h4>
+                        <p>${task.description}</p>
+                        ${task.type === 'copy' ? `<div class="copy-text">${task.description}</div>` : ''}
+                    </div>
+                    <div class="task-actions">
+                        <div class="task-checkbox ${isCompleted ? 'checked' : ''} ripple" data-task-id="${task.id}">
+                            ${isCompleted ? '<i class="fas fa-check"></i>' : ''}
+                        </div>
+                        <button class="details-button ripple" data-task-id="${task.id}">
+                            <i class="fas fa-info-circle"></i> Détails
+                        </button>
+                    </div>
+                `;
+                
+                todayTasksContainer.appendChild(taskCard);
+            });
+            
+            document.querySelectorAll('.task-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('click', function() {
+                    const taskId = this.getAttribute('data-task-id');
+                    toggleTaskCompletion(taskId);
+                });
+            });
+            
+            document.querySelectorAll('.details-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const taskId = this.getAttribute('data-task-id');
+                    showTaskDetails(taskId);
+                });
+            });
+        }
+
+        function toggleTaskCompletion(taskId) {
+            const checkbox = document.querySelector(`.task-checkbox[data-task-id="${taskId}"]`);
+            const isCompleted = appData.tasksCompleted[taskId] || false;
+            
+            if (!isCompleted) {
+                appData.tasksCompleted[taskId] = true;
+                checkbox.classList.add('checked');
+                checkbox.innerHTML = '<i class="fas fa-check"></i>';
+                
+                createConfetti();
+                playSuccessSound();
+                
+                localStorage.setItem('tasksCompleted', JSON.stringify(appData.tasksCompleted));
+                
+                checkForNewSticker();
+                checkForNewBadge();
+                updateProgress();
+                updateCalendar();
+                
+                showNotification('Mission accomplie ! 🎉');
+            }
+        }
+
+        function showTaskDetails(taskId) {
+            let taskDetails = null;
+            let dateStr = '';
+            
+            for (const date in vacationPlanning.tasksByDate) {
+                const task = vacationPlanning.tasksByDate[date].find(t => t.id === taskId);
+                if (task) {
+                    taskDetails = task;
+                    dateStr = date;
+                    break;
+                }
+            }
+            
+            if (!taskDetails) return;
+            
+            document.getElementById('modalTaskTitle').textContent = taskDetails.title;
+            
+            let detailsHTML = `
+                <p><strong>Date :</strong> ${formatDateDisplay(new Date(dateStr))}</p>
+                <p><strong>Description :</strong> ${taskDetails.description}</p>
+                <div style="background: rgba(248, 249, 250, 0.7); padding: 15px; border-radius: 10px; margin: 15px 0; backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.3);">
+                    <p><strong>Consigne détaillée :</strong></p>
+                    <p>${taskDetails.details}</p>
+                </div>
+                <p><strong>Statut :</strong> ${appData.tasksCompleted[taskId] ? '<span style="color: #06D6A0; font-weight: bold;">Terminé ✓</span>' : '<span style="color: #EF476F; font-weight: bold;">À faire</span>'}</p>
+            `;
+            
+            document.getElementById('modalTaskContent').innerHTML = detailsHTML;
+            document.getElementById('taskModal').classList.add('active');
+        }
+
+        function updateCalendar() {
+            const calendarGrid = document.getElementById('calendarGrid');
+            const calendarMonth = document.getElementById('calendarMonth');
+            
+            const monthNames = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+            const currentMonth = appData.currentDate.getMonth();
+            const currentYear = appData.currentDate.getFullYear();
+            
+            calendarMonth.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+            
+            const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
+            const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
+            let firstDayOfWeek = firstDayOfMonth.getDay();
+            if (firstDayOfWeek === 0) firstDayOfWeek = 6;
+            else firstDayOfWeek -= 1;
+            
+            calendarGrid.innerHTML = '';
+            
+            const dayNames = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+            dayNames.forEach(dayName => {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day-name';
+                dayElement.textContent = dayName;
+                calendarGrid.appendChild(dayElement);
+            });
+            
+            for (let i = 0; i < firstDayOfWeek; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day empty';
+                calendarGrid.appendChild(emptyDay);
+            }
+            
+            const today = new Date();
+            const todayStr = formatDate(today);
+            
+            for (let day = 1; day <= lastDayOfMonth.getDate(); day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day ripple';
+                dayElement.innerHTML = `<div class="day-number">${day}</div>`;
+                
+                const currentDay = new Date(currentYear, currentMonth, day);
+                const currentDayStr = formatDate(currentDay);
+                
+                if (currentDayStr === todayStr) {
+                    dayElement.classList.add('active');
+                }
+                
+                if (vacationPlanning.restDays.includes(currentDayStr)) {
+                    dayElement.classList.add('rest-day');
+                    dayElement.innerHTML += '<div class="day-status">Repos</div>';
+                } else if (vacationPlanning.tasksByDate[currentDayStr]) {
+                    const tasks = vacationPlanning.tasksByDate[currentDayStr];
+                    const completedTasks = tasks.filter(task => appData.tasksCompleted[task.id]).length;
+                    
+                    if (completedTasks === tasks.length) {
+                        dayElement.classList.add('complete');
+                        dayElement.innerHTML += '<div class="day-status">Terminé</div>';
+                    } else if (completedTasks > 0) {
+                        dayElement.classList.add('partial');
+                        dayElement.innerHTML += `<div class="day-status">${completedTasks}/${tasks.length}</div>`;
+                    } else {
+                        dayElement.classList.add('pending');
+                        dayElement.innerHTML += '<div class="day-status">À faire</div>';
+                    }
+                    
+                    dayElement.addEventListener('click', function() {
+                        appData.currentDate = currentDay;
+                        document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+                        document.querySelector('.tab[data-tab="today"]').classList.add('active');
+                        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                        document.getElementById('todayTab').classList.add('active');
+                        updateTodayScreen();
+                        playClickSound();
+                    });
+                } else {
+                    dayElement.classList.add('rest-day');
+                    dayElement.innerHTML += '<div class="day-status">-</div>';
+                }
+                
+                calendarGrid.appendChild(dayElement);
+            }
+        }
+
+        function updateRewards() {
+            const totalTasks = Object.keys(vacationPlanning.tasksByDate).reduce((total, date) => {
+                return total + vacationPlanning.tasksByDate[date].length;
+            }, 0);
+            
+            const completedTasks = Object.keys(appData.tasksCompleted).length;
+            const progressPercentage = totalTasks > 0 ? Math.min(100, Math.round((completedTasks / totalTasks) * 100)) : 0;
+            
+            document.getElementById('honeyFill').style.height = `${progressPercentage}%`;
+            document.getElementById('progressText').textContent = `Progression : ${progressPercentage}%`;
+            
+            updateStickers();
+            updateBadges();
+        }
+
+        function updateStickers() {
+            const stickersGrid = document.getElementById('stickersGrid');
+            stickersGrid.innerHTML = '';
+            
+            const daysWithCompletedTasks = new Set();
+            Object.keys(appData.tasksCompleted).forEach(taskId => {
+                for (const date in vacationPlanning.tasksByDate) {
+                    const task = vacationPlanning.tasksByDate[date].find(t => t.id === taskId);
+                    if (task) {
+                        daysWithCompletedTasks.add(date);
+                        break;
+                    }
+                }
+            });
+            
+            const completedDays = daysWithCompletedTasks.size;
+            
+            stickers.forEach(sticker => {
+                const isUnlocked = completedDays >= sticker.dayRequired;
+                const stickerElement = document.createElement('div');
+                stickerElement.className = `sticker ${isUnlocked ? 'unlocked' : 'locked'} ripple`;
+                stickerElement.style.backgroundColor = getRandomPastelColor();
+                stickerElement.innerHTML = sticker.icon;
+                stickerElement.title = `${sticker.name} - ${isUnlocked ? 'Débloqué !' : `Débloque après ${sticker.dayRequired} jour${sticker.dayRequired > 1 ? 's' : ''}`}`;
+                stickersGrid.appendChild(stickerElement);
+                
+                if (isUnlocked && !appData.stickersUnlocked.includes(sticker.id)) {
+                    appData.stickersUnlocked.push(sticker.id);
+                    localStorage.setItem('stickersUnlocked', JSON.stringify(appData.stickersUnlocked));
+                }
+            });
+        }
+
+        function updateBadges() {
+            const badgesGrid = document.getElementById('badgesGrid');
+            badgesGrid.innerHTML = '';
+            
+            let readingTasks = 0, mathTasks = 0, copyTasks = 0, ecoCopyTasks = 0;
+            
+            Object.keys(appData.tasksCompleted).forEach(taskId => {
+                for (const date in vacationPlanning.tasksByDate) {
+                    const task = vacationPlanning.tasksByDate[date].find(t => t.id === taskId);
+                    if (task) {
+                        if (task.type === 'reading') readingTasks++;
+                        if (task.type === 'math') mathTasks++;
+                        if (task.type === 'copy') copyTasks++;
+                        
+                        if (task.type === 'copy' && (
+                            task.description.includes('environnement') || 
+                            task.description.includes('planète') ||
+                            task.description.includes('nature') ||
+                            task.description.includes('pollution') ||
+                            task.description.includes('recycler')
+                        )) {
+                            ecoCopyTasks++;
+                        }
+                        break;
+                    }
+                }
+            });
+            
+            const totalTasks = Object.keys(vacationPlanning.tasksByDate).reduce((total, date) => {
+                return total + vacationPlanning.tasksByDate[date].length;
+            }, 0);
+            const completedTasks = Object.keys(appData.tasksCompleted).length;
+            
+            const badgesConditions = {
+                'complete5Reading': readingTasks >= 5,
+                'complete5Math': mathTasks >= 5,
+                'complete5Copy': copyTasks >= 5,
+                'completeAllEcoCopy': ecoCopyTasks >= 3,
+                'completeAllTasks': completedTasks >= totalTasks
+            };
+            
+            badges.forEach(badge => {
+                const isUnlocked = badgesConditions[badge.condition] || false;
+                const badgeElement = document.createElement('div');
+                badgeElement.className = `badge ${isUnlocked ? 'unlocked' : 'locked'} ripple`;
+                badgeElement.innerHTML = `
+                    <div class="badge-icon" style="background-color: ${badge.color}">
+                        ${badge.icon}
+                    </div>
+                    <div class="badge-name">${badge.name}</div>
+                    <div style="font-size: 0.8rem; color: #666; text-align: center;">
+                        ${isUnlocked ? 'Débloqué !' : 'À débloquer'}
+                    </div>
+                `;
+                badgesGrid.appendChild(badgeElement);
+                
+                if (isUnlocked && !appData.badgesUnlocked.includes(badge.id)) {
+                    appData.badgesUnlocked.push(badge.id);
+                    localStorage.setItem('badgesUnlocked', JSON.stringify(appData.badgesUnlocked));
+                }
+            });
+        }
+
+        function checkForNewSticker() {
+            const daysWithCompletedTasks = new Set();
+            Object.keys(appData.tasksCompleted).forEach(taskId => {
+                for (const date in vacationPlanning.tasksByDate) {
+                    const task = vacationPlanning.tasksByDate[date].find(t => t.id === taskId);
+                    if (task) {
+                        daysWithCompletedTasks.add(date);
+                        break;
+                    }
+                }
+            });
+            
+            const completedDays = daysWithCompletedTasks.size;
+            const newSticker = stickers.find(sticker => 
+                completedDays >= sticker.dayRequired && 
+                !appData.stickersUnlocked.includes(sticker.id)
+            );
+            
+            if (newSticker) {
+                appData.stickersUnlocked.push(newSticker.id);
+                localStorage.setItem('stickersUnlocked', JSON.stringify(appData.stickersUnlocked));
+                showNotification(`Nouveau sticker débloqué : ${newSticker.name} ${newSticker.icon}`);
+                updateRewards();
+            }
+        }
+
+        function checkForNewBadge() {
+            let readingTasks = 0, mathTasks = 0, copyTasks = 0, ecoCopyTasks = 0;
+            
+            Object.keys(appData.tasksCompleted).forEach(taskId => {
+                for (const date in vacationPlanning.tasksByDate) {
+                    const task = vacationPlanning.tasksByDate[date].find(t => t.id === taskId);
+                    if (task) {
+                        if (task.type === 'reading') readingTasks++;
+                        if (task.type === 'math') mathTasks++;
+                        if (task.type === 'copy') copyTasks++;
+                        
+                        if (task.type === 'copy' && (
+                            task.description.includes('environnement') || 
+                            task.description.includes('planète') ||
+                            task.description.includes('nature') ||
+                            task.description.includes('pollution') ||
+                            task.description.includes('recycler')
+                        )) {
+                            ecoCopyTasks++;
+                        }
+                        break;
+                    }
+                }
+            });
+            
+            const totalTasks = Object.keys(vacationPlanning.tasksByDate).reduce((total, date) => {
+                return total + vacationPlanning.tasksByDate[date].length;
+            }, 0);
+            const completedTasks = Object.keys(appData.tasksCompleted).length;
+            
+            const badgesConditions = {
+                'complete5Reading': readingTasks >= 5,
+                'complete5Math': mathTasks >= 5,
+                'complete5Copy': copyTasks >= 5,
+                'completeAllEcoCopy': ecoCopyTasks >= 3,
+                'completeAllTasks': completedTasks >= totalTasks
+            };
+            
+            const newBadge = badges.find(badge => 
+                badgesConditions[badge.condition] && 
+                !appData.badgesUnlocked.includes(badge.id)
+            );
+            
+            if (newBadge) {
+                appData.badgesUnlocked.push(newBadge.id);
+                localStorage.setItem('badgesUnlocked', JSON.stringify(appData.badgesUnlocked));
+                showNotification(`Nouveau badge débloqué : ${newBadge.name} ${newBadge.icon}`);
+                updateRewards();
+            }
+        }
+
+        function updateProgress() {
+            const totalTasks = Object.keys(vacationPlanning.tasksByDate).reduce((total, date) => {
+                return total + vacationPlanning.tasksByDate[date].length;
+            }, 0);
+            const completedTasks = Object.keys(appData.tasksCompleted).length;
+            const progressPercentage = totalTasks > 0 ? Math.min(100, Math.round((completedTasks / totalTasks) * 100)) : 0;
+            
+            document.getElementById('honeyFill').style.height = `${progressPercentage}%`;
+            document.getElementById('progressText').textContent = `Progression : ${progressPercentage}%`;
+        }
+
+        // Fonctions de partage
+        function showShareModal() {
+            // Calculer les stats
+            const totalTasks = Object.keys(vacationPlanning.tasksByDate).reduce((total, date) => {
+                return total + vacationPlanning.tasksByDate[date].length;
+            }, 0);
+            const completedTasks = Object.keys(appData.tasksCompleted).length;
+            const progressPercentage = totalTasks > 0 ? Math.min(100, Math.round((completedTasks / totalTasks) * 100)) : 0;
+            
+            const daysWithCompletedTasks = new Set();
+            Object.keys(appData.tasksCompleted).forEach(taskId => {
+                for (const date in vacationPlanning.tasksByDate) {
+                    const task = vacationPlanning.tasksByDate[date].find(t => t.id === taskId);
+                    if (task) {
+                        daysWithCompletedTasks.add(date);
+                        break;
+                    }
+                }
+            });
+            
+            const completedDays = daysWithCompletedTasks.size;
+            const unlockedStickers = stickers.filter(sticker => 
+                completedDays >= sticker.dayRequired
+            ).length;
+            
+            const unlockedBadges = badges.filter(badge => {
+                let readingTasks = 0, mathTasks = 0, copyTasks = 0, ecoCopyTasks = 0;
+                
+                Object.keys(appData.tasksCompleted).forEach(taskId => {
+                    for (const date in vacationPlanning.tasksByDate) {
+                        const task = vacationPlanning.tasksByDate[date].find(t => t.id === taskId);
+                        if (task) {
+                            if (task.type === 'reading') readingTasks++;
+                            if (task.type === 'math') mathTasks++;
+                            if (task.type === 'copy') copyTasks++;
+                            
+                            if (task.type === 'copy' && (
+                                task.description.includes('environnement') || 
+                                task.description.includes('planète') ||
+                                task.description.includes('nature') ||
+                                task.description.includes('pollution') ||
+                                task.description.includes('recycler')
+                            )) {
+                                ecoCopyTasks++;
+                            }
+                            break;
+                        }
+                    }
+                });
+                
+                const totalTasks = Object.keys(vacationPlanning.tasksByDate).reduce((total, date) => {
+                    return total + vacationPlanning.tasksByDate[date].length;
+                }, 0);
+                const completedTasks = Object.keys(appData.tasksCompleted).length;
+                
+                const badgesConditions = {
+                    'complete5Reading': readingTasks >= 5,
+                    'complete5Math': mathTasks >= 5,
+                    'complete5Copy': copyTasks >= 5,
+                    'completeAllEcoCopy': ecoCopyTasks >= 3,
+                    'completeAllTasks': completedTasks >= totalTasks
+                };
+                
+                return badgesConditions[badge.condition] || false;
+            }).length;
+            
+            // Mettre à jour le texte de partage
+            document.getElementById('shareProgressText').textContent = `Progression : ${progressPercentage}%`;
+            document.getElementById('shareStickersText').textContent = `Stickers : ${unlockedStickers}/${stickers.length}`;
+            document.getElementById('shareBadgesText').textContent = `Badges : ${unlockedBadges}/${badges.length}`;
+            
+            // Afficher la modal
+            document.getElementById('shareModal').classList.add('active');
+        }
+
+        function shareOnFacebook() {
+            const shareText = `Je suis à ${document.getElementById('progressText').textContent} dans La Ruche des Vacances ! 🐝✨ #LaRucheDesVacances #CE1`;
+            const url = encodeURIComponent(window.location.href);
+            const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${encodeURIComponent(shareText)}`;
+            window.open(facebookUrl, '_blank', 'width=600,height=400');
+        }
+
+        function shareOnWhatsApp() {
+            const shareText = `Je suis à ${document.getElementById('progressText').textContent} dans La Ruche des Vacances ! 🐝✨`;
+            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+            window.open(whatsappUrl, '_blank', 'width=600,height=400');
+        }
+
+        function printProgress() {
+            const printContent = `
+                <html>
+                <head>
+                    <title>Ma Progression - La Ruche des Vacances</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; padding: 20px; }
+                        h1 { color: #073B4C; }
+                        .stats { background: #FFD166; padding: 20px; border-radius: 10px; margin: 20px 0; }
+                        .logo { text-align: center; margin-bottom: 20px; }
+                    </style>
+                </head>
+                <body>
+                    <div class="logo">
+                        <h1>🐝 La Ruche des Vacances</h1>
+                        <h2>Ma Progression</h2>
+                    </div>
+                    <div class="stats">
+                        <h3>${document.getElementById('userName').textContent}</h3>
+                        <p><strong>${document.getElementById('progressText').textContent}</strong></p>
+                        <p>${document.getElementById('shareStickersText').textContent}</p>
+                        <p>${document.getElementById('shareBadgesText').textContent}</p>
+                        <p>Date : ${new Date().toLocaleDateString('fr-FR')}</p>
+                    </div>
+                    <p>Bravo pour ton travail ! Continue comme ça ! 🎉</p>
+                </body>
+                </html>
+            `;
+            
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(printContent);
+            printWindow.document.close();
+            printWindow.focus();
+            
+            setTimeout(() => {
+                printWindow.print();
+                printWindow.close();
+            }, 250);
+        }
+
+        // Fonctions utilitaires
+        function formatDate(date) {
+            return date.toISOString().split('T')[0];
+        }
+
+        function formatDateDisplay(date) {
+            const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+            return date.toLocaleDateString('fr-FR', options);
+        }
+
+        function getAvatarName(avatarType) {
+            switch(avatarType) {
+                case 'bee': return 'Super Abeille';
+                case 'rocket': return 'Fusée des étoiles';
+                case 'bubble': return 'Bulle Joyeuse';
+                case 'star': return 'Étoile Brillante';
+                default: return 'Super Bulle';
+            }
+        }
+
+        function getRandomPastelColor() {
+            const hue = Math.floor(Math.random() * 360);
+            return `hsl(${hue}, 70%, 85%)`;
+        }
+
+        function createConfetti() {
+            const colors = ['#FFD166', '#06D6A0', '#118AB2', '#EF476F', '#9D4EDD', '#FF9E6D'];
+            const confettiCount = Math.min(40, Math.floor(window.innerWidth / 20));
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = Math.random() * 8 + 4 + 'px';
+                confetti.style.height = Math.random() * 8 + 4 + 'px';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                confetti.style.zIndex = '9999';
+                
+                document.body.appendChild(confetti);
+                
+                const animation = confetti.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 1500 + 800,
+                    easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
+                });
+                
+                animation.onfinish = () => {
+                    if (confetti.parentNode) confetti.parentNode.removeChild(confetti);
+                };
+            }
+        }
+
+        function playSuccessSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = 523.25;
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.4);
+            } catch (e) {}
+        }
+
+        function playClickSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = 600;
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.08, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.08);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.08);
+            } catch (e) {}
+        }
+
+        function showNotification(message) {
+            const existingNotifications = document.querySelectorAll('.notification');
+            existingNotifications.forEach(notification => notification.remove());
+            
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerHTML = `<i class="fas fa-trophy" style="color: #FFD166;"></i> ${message}`;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentNode) notification.parentNode.removeChild(notification);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
